@@ -1,17 +1,8 @@
 library(ggplot2)
-
-
-
-
-
-
+library(dplyr)
 
 sf_tall <- filter(sf_trees, dbh < 1000, dbh >= 100)  %>% arrange(desc(dbh)) %>%
   mutate(rank = 1:n())
-
-
-
-
 
 ### there should be a neater way to make this new dataframe. Basically, I want 
 ### three copies of each row to add the number of the pane I want the plot to show 
@@ -40,10 +31,6 @@ sf_tall <- mutate(sf_tall,
 sf_tall$label <- factor(sf_tall$label, levels = c("lat vs lon", "lat vs height", 
                                                   "height vs lon"))
 
-
-                                 
-
-                               
 
 ggplot(data = sf_tall) + 
   geom_point(aes(x = x, y = y), colour = "darkgreen", shape = 21) + 
