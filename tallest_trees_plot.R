@@ -1,6 +1,10 @@
 library(ggplot2)
 library(dplyr)
 
+
+sf_trees <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-28/sf_trees.csv')
+
+### Assuming that the entries with dbh > 1000 are erroneous
 sf_tall <- filter(sf_trees, dbh < 1000, dbh >= 100)  %>% arrange(desc(dbh)) %>%
   mutate(rank = 1:n())
 
@@ -38,6 +42,6 @@ ggplot(data = sf_tall) +
                colour = "sienna") + 
   facet_wrap(~label, ncol = 2, scale = "free") + 
   theme_minimal() + 
-  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(plot.title = element_text(hjust = 0.5, size = 20, face = "bold")) +
   ggtitle("Tallest trees in San Francisco") 
 
